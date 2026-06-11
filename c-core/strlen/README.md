@@ -3,7 +3,7 @@
 Return the length of a string
 
 ```c
-size_t strlen(const char *s)
+size_t gm_strlen(const char *s)
 ```
 
 **Difficulty:** 3/5

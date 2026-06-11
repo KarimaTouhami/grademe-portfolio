@@ -3,7 +3,7 @@
 Compare two strings byte by byte and return the difference
 
 ```c
-int strcmp(const char *s1, const char *s2)
+int gm_strcmp(const char *s1, const char *s2)
 ```
 
 **Difficulty:** 4/5
