@@ -10,8 +10,8 @@ int	ft_is_space(char c)
 int	main(int argc, char *argv[])
 {
 	int	i;
-	int	word_end;
-	int	word_start;
+	int	end;
+	int	start;
 
 	if (argc != 2)
 	{
@@ -24,14 +24,19 @@ int	main(int argc, char *argv[])
 	i--;
 	while (i >= 0 && ft_is_space(argv[1][i]))
 		i--;
-	word_end = i;
+	if (i < 0)
+	{
+		write(1, "\n", 1);
+		return (0);
+	}
+	end = i;
 	while (i >= 0 && !ft_is_space(argv[1][i]))
 		i--;
-	word_start = i + 1;
-	while (word_start <= word_end && word_end >= 0)
+	start = i + 1;
+	while (start <= end)
 	{
-		write(1, &argv[1][word_start], 1);
-		word_start++;
+		write(1, &argv[1][start], 1);
+		start++;
 	}
 	write(1, "\n", 1);
 	return (0);
