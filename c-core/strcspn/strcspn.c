@@ -1,6 +1,6 @@
 #include <stddef.h>
 
-size_t	strcspn(const char *s, const char *reject)
+size_t	gm_strcspn(const char *s, const char *reject)
 {
 	size_t	i;
 	size_t	j;

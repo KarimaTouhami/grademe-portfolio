@@ -3,7 +3,7 @@
 Return the index of the first character in s that belongs to the reject set
 
 ```c
-size_t strcspn(const char *s, const char *reject)
+size_t gm_strcspn(const char *s, const char *reject)
 ```
 
 **Difficulty:** 3/5
