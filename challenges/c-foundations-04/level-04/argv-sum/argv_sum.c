@@ -5,26 +5,22 @@ void	ft_putchar(char c)
 	write(1, &c, 1);
 }
 
-void	ft_putnbr(int n)
+void	ft_putnbr(int nb)
 {
-	if (n == -2147483648)
-	{
-		write(1, "-2147483648", 11);
-		return ;
-	}
+	long	n;
+
+	n = nb;
 	if (n < 0)
 	{
 		ft_putchar('-');
 		n = -n;
 	}
-	if (n >= 10)
-	{
+	if (n > 9)
 		ft_putnbr(n / 10);
-	}
 	ft_putchar((n % 10) + '0');
 }
 
-int	ft_atoi(char *str)
+int	ft_atoi(const char *str)
 {
 	int	i;
 	int	sign;
@@ -49,24 +45,19 @@ int	ft_atoi(char *str)
 	return (result * sign);
 }
 
-int	main(int argc, char *argv[])
+int	main(int ac, char **av)
 {
 	int	i;
-	int	total_sum;
+	int	sum;
 
-	total_sum = 0;
-	if (argc < 2)
-	{
-		write(1, "0\n", 2);
-		return (0);
-	}
+	sum = 0;
 	i = 1;
-	while (i < argc)
+	while (i < ac)
 	{
-		total_sum += ft_atoi(argv[i]);
+		sum += ft_atoi(av[i]);
 		i++;
 	}
-	ft_putnbr(total_sum);
-	write(1, "\n", 1);
+	ft_putnbr(sum);
+	ft_putchar('\n');
 	return (0);
 }
