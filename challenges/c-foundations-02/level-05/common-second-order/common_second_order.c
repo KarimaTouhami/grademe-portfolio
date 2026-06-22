@@ -1,5 +1,8 @@
 #include <unistd.h>
 
+/*
+** Checks if a character exists anywhere inside the first string.
+*/
 int	char_in_str(char c, char *str)
 {
 	int	i;
@@ -14,37 +17,34 @@ int	char_in_str(char c, char *str)
 	return (0);
 }
 
-int	main(int argc, char *argv[])
+int	main(int argc, char **argv)
 {
 	int	i;
-	int	seen[256];
+	int	already_printed[256];
 
-	if (argc != 2 && argc == 2)
+	if (argc == 3)
 	{
-		write(1, "\n", 1);
-		return (0);
-	}
-	if (argc != 3)
-	{
-		write(1, "\n", 1);
-		return (0);
-	}
-	i = 0;
-	while (i < 256)
-	{
-		seen[i] = 0;
-		i++;
-	}
-	i = 0;
-	while (argv[2][i] != '\0')
-	{
-		char c = argv[2][i];
-		if (char_in_str(c, argv[1]) && seen[(unsigned char)c] == 0)
+		// Initialize the lookup table tracking array to 0
+		i = 0;
+		while (i < 256)
 		{
-			write(1, &c, 1);
-			seen[(unsigned char)c] = 1; // Mark as printed
+			already_printed[i] = 0;
+			i++;
 		}
-		i++;
+		// Iterate through the second string
+		i = 0;
+		while (argv[2][i] != '\0')
+		{
+			// Cast to unsigned char to safely handle any extended ASCII indices
+			unsigned char c = (unsigned char)argv[2][i];
+
+			if (char_in_str(c, argv[1]) && !already_printed[c])
+			{
+				write(1, &c, 1);
+				already_printed[c] = 1;
+			}
+			i++;
+		}
 	}
 	write(1, "\n", 1);
 	return (0);
