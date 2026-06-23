@@ -3,7 +3,7 @@
 Write a string followed by a newline to standard output
 
 ```c
-int puts(const char *s)
+int gm_puts(const char *s)
 ```
 
 **Difficulty:** 2/5

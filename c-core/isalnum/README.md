@@ -1,9 +1,9 @@
 # isalnum
 
-Return non-zero when a character is a letter or a decimal digit
+Return non\-zero when a character is a letter or a decimal digit
 
 ```c
-int isalnum(int c)
+int gm_isalnum(int c)
 ```
 
 **Difficulty:** 2/5

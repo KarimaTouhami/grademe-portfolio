@@ -1,9 +1,9 @@
 # isalpha
 
-Return non-zero if a character is an ASCII letter
+Return non\-zero if a character is an ASCII letter
 
 ```c
-int isalpha(int c)
+int gm_isalpha(int c)
 ```
 
 **Difficulty:** 2/5

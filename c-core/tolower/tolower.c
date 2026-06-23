@@ -1,4 +1,4 @@
-int	tolower(int c)
+int	gm_tolower(int c)
 {
 	if (c >= 'A' && c <= 'Z')
 		c += 32;

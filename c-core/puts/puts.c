@@ -1,6 +1,6 @@
 #include <unistd.h>
 
-int	puts(const char *s)
+int	gm_puts(const char *s)
 {
 	int i = 0;
 	while (s[i])

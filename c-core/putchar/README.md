@@ -3,7 +3,7 @@
 Write one byte to standard output and return it
 
 ```c
-int putchar(int c)
+int gm_putchar(int c)
 ```
 
 **Difficulty:** 1/5

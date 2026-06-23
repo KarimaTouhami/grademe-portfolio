@@ -3,7 +3,7 @@
 Convert an uppercase letter to lowercase, leaving everything else unchanged
 
 ```c
-int tolower(int c)
+int gm_tolower(int c)
 ```
 
 **Difficulty:** 2/5

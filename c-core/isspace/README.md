@@ -3,7 +3,7 @@
 Report whether a character is whitespace
 
 ```c
-int isspace(int c)
+int gm_isspace(int c)
 ```
 
 **Difficulty:** 2/5

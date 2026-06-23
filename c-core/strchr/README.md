@@ -3,7 +3,7 @@
 Find the first occurrence of a character in a string
 
 ```c
-char *strchr(const char *s, int c)
+char *gm_strchr(const char *s, int c)
 ```
 
 **Difficulty:** 3/5

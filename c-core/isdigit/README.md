@@ -1,9 +1,9 @@
 # isdigit
 
-Return non-zero if a character is a decimal digit
+Return non\-zero if a character is a decimal digit
 
 ```c
-int isdigit(int c)
+int gm_isdigit(int c)
 ```
 
 **Difficulty:** 2/5

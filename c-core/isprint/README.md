@@ -1,9 +1,9 @@
 # isprint
 
-Return non-zero if a character is printable, including space
+Return non\-zero if a character is printable, including space
 
 ```c
-int isprint(int c)
+int gm_isprint(int c)
 ```
 
 **Difficulty:** 2/5

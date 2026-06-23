@@ -1,6 +1,6 @@
 #include <stddef.h>
 
-char *strchr(const char *s, int c)
+char *gm_strchr(const char *s, int c)
 {
     char target = (char)c;
 

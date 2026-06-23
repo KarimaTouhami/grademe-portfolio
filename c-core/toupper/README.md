@@ -3,7 +3,7 @@
 Convert a lowercase letter to uppercase, leaving everything else unchanged
 
 ```c
-int toupper(int c)
+int gm_toupper(int c)
 ```
 
 **Difficulty:** 2/5
