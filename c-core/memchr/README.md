@@ -3,7 +3,7 @@
 Scan the first n bytes of memory for a byte and return its address
 
 ```c
-void *memchr(const void *s, int c, size_t n)
+void *gm_memchr(const void *s, int c, size_t n)
 ```
 
 **Difficulty:** 3/5

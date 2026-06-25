@@ -3,7 +3,7 @@
 Copy n bytes from src to dst and return dst
 
 ```c
-void *memcpy(void *dst, const void *src, size_t n)
+void *gm_memcpy(void *dst, const void *src, size_t n)
 ```
 
 **Difficulty:** 3/5

@@ -3,7 +3,7 @@
 Find the first occurrence of a substring inside a string
 
 ```c
-char *strstr(const char *haystack, const char *needle)
+char *gm_strstr(const char *haystack, const char *needle)
 ```
 
 **Difficulty:** 4/5
