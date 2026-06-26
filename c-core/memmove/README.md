@@ -3,7 +3,7 @@
 Copy n bytes between buffers, even when they overlap
 
 ```c
-void *memmove(void *dst, const void *src, size_t n)
+void *gm_memmove(void *dst, const void *src, size_t n)
 ```
 
 **Difficulty:** 4/5

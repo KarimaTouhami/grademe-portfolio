@@ -1,9 +1,9 @@
 # calloc
 
-Allocate zero-initialized memory for an array, guarding against multiplication overflow
+Allocate zero\-initialized memory for an array, guarding against multiplication overflow
 
 ```c
-void *calloc(size_t nmemb, size_t size)
+void *gm_calloc(size_t nmemb, size_t size)
 ```
 
 **Difficulty:** 4/5

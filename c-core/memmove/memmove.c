@@ -1,6 +1,6 @@
 #include <stddef.h>
 
-void *memmove(void *dest, const void *src, size_t n) {
+void *gm_memmove(void *dest, const void *src, size_t n) {
     char *d = dest;
     const char *s = src;
 

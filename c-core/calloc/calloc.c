@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <stdint.h>
 
-void	*calloc(size_t nmemb, size_t size)
+void	*gm_calloc(size_t nmemb, size_t size)
 {
 	void			*ptr;
 	unsigned char	*byte_ptr;
