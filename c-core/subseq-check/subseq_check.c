@@ -1,45 +1,41 @@
 #include <unistd.h>
 
-void	ft_putstr(char *str)
+static void	put_str(char *s)
 {
-	int i = 0;
-	while (str[i])
+	int	i;
+
+	i = 0;
+	while (s[i])
 	{
-		write(1, &str[i], 1);
+		write(1, &s[i], 1);
 		i++;
 	}
+	write(1, "\n", 1);
 }
 
 int	main(int argc, char **argv)
 {
+	int	i;
+	int	j;
+
 	if (argc != 3)
 	{
-		ft_putstr("wrong number of arguments\n");
+		put_str("wrong number of arguments");
 		return (0);
 	}
-
-	char *s1 = argv[1];
-	char *s2 = argv[2];
-	int i = 0;
-	int j = 0;
-
-	while (s2[j] != '\0' && s1[i] != '\0')
+	i = 0;
+	j = 0;
+	while (argv[2][j])
 	{
-		if (s2[j] == s1[i])
-		{
+		if (argv[1][i] == argv[2][j])
 			i++;
-		}
+		if (argv[1][i] == '\0')
+			break ;
 		j++;
 	}
-
-	if (s1[i] == '\0')
-	{
-		ft_putstr("yes\n");
-	}
+	if (argv[1][i] == '\0')
+		put_str("yes");
 	else
-	{
-		ft_putstr("no\n");
-	}
-
+		put_str("no");
 	return (0);
 }
