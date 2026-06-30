@@ -1,21 +1,21 @@
 #include <unistd.h>
 
-int main(int argc, char **argv)
-{
-    int i;
-	int j;
+int main(int argc, char **argv) {
+    int i = argc - 1;
 
-    i = argc - 1;
-    while (i > 0)
-    {
-        j = 0;
-        while (argv[i][j])
-        {
-            write(1, &argv[i][j], 1);
-            j++;
+    while (i > 0) {
+        int len = 0;
+
+        while (argv[i][len] != '\0') {
+            len++;
         }
+
+        write(1, argv[i], len);
+
         write(1, "\n", 1);
+
         i--;
     }
-    return (0);
+
+    return 0;
 }

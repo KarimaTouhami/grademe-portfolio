@@ -1,14 +1,21 @@
 #include <unistd.h>
 
-int	puts(const char *s)
-{
-	int i;
-	i = 0;
-	while (s[i])
-	{
-		write(1, &s[i], 1);
-		i++;
+#include <unistd.h>
+
+int puts(const char *s) {
+    int len = 0;
+
+    while (s[len] != '\0') {
+        len++;
+    }
+
+    if (write(1, s, len) < 0) {
+        return -1;
 	}
-	write(1, "\n", 1);
-	return (0);
+
+    if (write(1, "\n", 1) < 0) {
+        return -1;
+	}
+
+    return 0;
 }
