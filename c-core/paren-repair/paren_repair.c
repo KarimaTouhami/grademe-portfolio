@@ -1,66 +1,68 @@
 #include <unistd.h>
 
-void	mini_print(char c)
+int	check(char *s)
 {
-	write(1, &c, 1);
-}
-
-int	get_min_replacements(char *str)
-{
+	int	o;
+	int	c;
 	int	i;
-	int	open;
-	int	close;
 
+	o = 0;
+	c = 0;
 	i = 0;
-	open = 0;
-	close = 0;
-	while (str[i])
+	while (s[i])
 	{
-		if (str[i] == '(')
-			open++;
-		else if (str[i] == ')')
+		if (s[i] == '(')
+			o++;
+		else if (s[i] == ')')
 		{
-			if (open > 0)
-				open--;
+			if (o > 0)
+				o--;
 			else
-				close++;
+				c++;
 		}
 		i++;
 	}
-	return (open + close);
+	return (o + c);
 }
 
-void	solve(char *str, char *out, int i, int balance, int spaces_left)
+void	print_str(char *s)
 {
-	if (balance < 0 || spaces_left < 0)
+	int	len;
+
+	len = 0;
+	while (s[len])
+		len++;
+	write(1, s, len);
+	write(1, "\n", 1);
+}
+
+void	solve(char *s, int i, int o, int rem)
+{
+	if (o < 0)
 		return ;
-	if (!str[i])
+	if (!s[i])
 	{
-		if (balance == 0 && spaces_left == 0)
-		{
-			out[i] = '\0';
-			int j = 0;
-			while (out[j])
-				mini_print(out[j++]);
-			mini_print('\n');
-		}
+		if (!o && !rem)
+			print_str(s);
 		return ;
 	}
-	out[i] = ' ';
-	solve(str, out, i + 1, balance, spaces_left - 1);
-
-	out[i] = str[i];
-	solve(str, out, i + 1, balance + (str[i] == '(' ? 1 : -1), spaces_left);
+	if (rem > 0)
+	{
+		char c = s[i];
+		s[i] = ' ';
+		solve(s, i + 1, o, rem - 1);
+		s[i] = c;
+	}
+	if (s[i] == '(')
+		solve(s, i + 1, o + 1, rem);
+	else if (s[i] == ')')
+		solve(s, i + 1, o - 1, rem);
 }
 
-int	main(int argc, char **argv)
+int	main(int ac, char **av)
 {
-	char	out[2048];
-	int		min_spaces;
-
-	if (argc != 2)
+	if (ac != 2)
 		return (1);
-	min_spaces = get_min_replacements(argv[1]);
-	solve(argv[1], out, 0, 0, min_spaces);
+	solve(av[1], 0, 0, check(av[1]));
 	return (0);
 }

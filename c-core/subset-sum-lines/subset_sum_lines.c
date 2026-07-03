@@ -1,82 +1,45 @@
-#include <stdio.h>
 #include <stdlib.h>
+#include <stdio.h>
 
-static void	print_subset(int *source, int *selected, int size)
+void	dfs(int *nums, int count, int target, int i, int sum, int *sub, int s_idx)
 {
-	int	i;
-	int	first;
+	int	k;
 
-	i = 0;
-	first = 1;
-	while (i < size)
+	if (i == count)
 	{
-		if (selected[i])
+		if (sum == target)
 		{
-			if (!first)
-				printf(" ");
-			printf("%d", source[i]);
-			first = 0;
+			k = 0;
+			while (k < s_idx)
+			{
+				printf("%d", sub[k]);
+				if (k < s_idx - 1)
+					printf(" ");
+				k++;
+			}
+			printf("\n");
 		}
-		i++;
-	}
-	printf("\n");
-}
-
-static void	find_subsets(int *src, int *sel, int size, int idx, int target)
-{
-	if (idx == size)
-	{
-		if (target == 0)
-			print_subset(src, sel, size);
 		return ;
 	}
-
-	sel[idx] = 1;
-	find_subsets(src, sel, size, idx + 1, target - src[idx]);
-
-	sel[idx] = 0;
-	find_subsets(src, sel, size, idx + 1, target);
+	sub[s_idx] = nums[i];
+	dfs(nums, count, target, i + 1, sum + nums[i], sub, s_idx + 1);
+	dfs(nums, count, target, i + 1, sum, sub, s_idx);
 }
 
 int	main(int argc, char **argv)
 {
-	int	target;
-	int	size;
-	int	*source;
-	int	*selected;
+	int	nums[1024];
+	int	sub[1024];
 	int	i;
 
-	if (argc < 2)
+	if (argc < 3)
 		return (1);
-		
-	target = atoi(argv[1]);
-	size = argc - 2;
-
-	if (size == 0)
-	{
-		if (target == 0)
-		{
-			printf("\n");
-			return (0);
-		}
-		return (1); 
-	}
-	
-	source = malloc(sizeof(int) * size);
-	selected = calloc(size, sizeof(int));
-	if (!source || !selected)
-		return (1);
-		
 	i = 0;
-	while (i < size)
+	while (i < argc - 2)
 	{
-		source[i] = atoi(argv[i + 2]);
+		nums[i] = atoi(argv[i + 2]);
 		i++;
 	}
-	
-	find_subsets(source, selected, size, 0, target);
-	
-	free(source);
-	free(selected);
+	dfs(nums, argc - 2, atoi(argv[1]), 0, 0, sub, 0);
 	return (0);
 }
