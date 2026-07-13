@@ -1,31 +1,34 @@
 #include <unistd.h>
 
-void	ft_shift_char(char c)
+int	main(int argc, char **argv)
 {
-	if (c >= 'a' && c <= 'y')
-		c += 1;
-	else if (c == 'z')
-		c = 'a';
-	else if (c >= 'A' && c <= 'Y')
-		c += 1;
-	else if (c == 'Z')
-		c = 'A';
-	write(1, &c, 1);
-}
-
-int	main(int argc, char *argv[])
-{
-	int	i;
+	int		i;
+	char	c;
 
 	if (argc != 2)
 	{
-		write(1, "\n", 1);
+		write(1, "wrong number of arguments\n", 26);
 		return (0);
 	}
 	i = 0;
 	while (argv[1][i] != '\0')
 	{
-		ft_shift_char(argv[1][i]);
+		c = argv[1][i];
+		if (c >= 'a' && c <= 'z')
+		{
+			if (c == 'z')
+				c = 'a';
+			else
+				c++;
+		}
+		else if (c >= 'A' && c <= 'Z')
+		{
+			if (c == 'Z')
+				c = 'A';
+			else
+				c++;
+		}
+		write(1, &c, 1);
 		i++;
 	}
 	write(1, "\n", 1);
