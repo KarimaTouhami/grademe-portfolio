@@ -1,4 +1,4 @@
-char	*strcpy(char *dst, const char *src)
+char	*gm_strcpy(char *dst, const char *src)
 {
 	char *save;
 
