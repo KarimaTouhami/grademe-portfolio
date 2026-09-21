@@ -10,5 +10,6 @@ void row_sums(const int (*rows)[4], size_t nrows, int *out)
 **Allowed functions:** none
 
 Solved in practice.
+Validated 2 times. Earlier versions are in this file's git history.
 
 [Read the full exercise on Grademe](https://grademe.io/app/exercise/row-sums)

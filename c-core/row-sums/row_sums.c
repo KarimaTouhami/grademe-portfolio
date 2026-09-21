@@ -1,4 +1,5 @@
 #include <stddef.h>
+#include <stdio.h>
 
 void	row_sums(const int (*rows)[4], size_t nrows, int *out)
 {
