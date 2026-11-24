@@ -1,4 +1,4 @@
-# alpha_pairs
+# alpha\_pairs
 
 Display the alphabet with each letter repeated twice, alternating case per pair
 
@@ -6,6 +6,6 @@ Display the alphabet with each letter repeated twice, alternating case per pair
 **Allowed functions:** write
 
 Solved as level 3 of the c-foundations-01 challenge.
-Validated 4 times. Earlier versions are in this file's git history.
+Validated 5 times. Earlier versions are in this file's git history.
 
 [Read the full exercise on Grademe](https://grademe.io/app/exercise/alpha-pairs)

@@ -1,4 +1,4 @@
-# shift_alpha
+# shift\_alpha
 
 Advance each letter by one position in the alphabet, wrapping z to a
 
@@ -6,6 +6,6 @@ Advance each letter by one position in the alphabet, wrapping z to a
 **Allowed functions:** write
 
 Solved as level 8 of the c-foundations-01 challenge.
-Validated 3 times. Earlier versions are in this file's git history.
+Validated 4 times. Earlier versions are in this file's git history.
 
 [Read the full exercise on Grademe](https://grademe.io/app/exercise/shift-alpha)
