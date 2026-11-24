@@ -1,17 +1,19 @@
 #include <stddef.h>
 
-int my_memcmp(void *s1, void *s2, size_t n)
+int	gm_memcmp(const void *s1, const void *s2, size_t n)
 {
-    unsigned char *p = s1;
-    unsigned char *q = s2;
+	const unsigned char	*p1;
+	const unsigned char	*p2;
+	size_t				i;
 
-    while (n > 0)
-    {
-        if (*p != *q)
-            return (*p - *q);
-        n--;
-        p++;
-        q++;
-    }
-    return 0;
+	p1 = (const unsigned char *)s1;
+	p2 = (const unsigned char *)s2;
+	i = 0;
+	while (i < n)
+	{
+		if (p1[i] != p2[i])
+			return ((int)p1[i] - (int)p2[i]);
+		i++;
+	}
+	return (0);
 }

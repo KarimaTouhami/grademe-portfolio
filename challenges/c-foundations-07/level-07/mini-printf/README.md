@@ -1,4 +1,4 @@
-# mini_printf
+# mini\_printf
 
 A minimal printf supporting %c, %s, %d, %x and %%, returning the number of bytes written
 
@@ -10,6 +10,6 @@ int mini_printf(const char *format, ...)
 **Allowed functions:** write
 
 Solved as level 7 of the c-foundations-07 challenge.
-Validated 2 times. Earlier versions are in this file's git history.
+Validated 3 times. Earlier versions are in this file's git history.
 
 [Read the full exercise on Grademe](https://grademe.io/app/exercise/mini-printf)

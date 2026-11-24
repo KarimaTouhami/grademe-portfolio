@@ -1,93 +1,133 @@
-#include <unistd.h>
 #include <stdarg.h>
+#include <stddef.h>
+#include <unistd.h>
 
-void	ft_putchar(char c, int *count)
+static int	write_all(const char *buf, size_t len)
 {
-	write(1, &c, 1);
-	(*count)++;
+	ssize_t w;
+
+	if (len == 0)
+		return (0);
+	w = write (1, buf, len);
+	if (w < 0)
+		return (-1);
+	return ((int)w);
 }
 
-void	ft_putstr(char *str, int *count)
+static int print_str(const char *s)
 {
-	int	i;
+	size_t	len;
 
-	if (!str)
-		str = "(null)";
-	i = 0;
-	while (str[i] != '\0')
+	if (!s)
+		s = "(null)";
+	len = 0;
+	while (s[len])
+		len++;
+	return (write_all(s, len));
+}
+
+static int printf_unsigned(unsigned long n, const char *digits, unsigned int base)
+{
+	char buf[32];
+	int len;
+	int i;
+
+	len = 0;
+	if (n == 0)
+		buf[len++] = digits[0];
+	while (n > 0)
 	{
-		ft_putchar(str[i], count);
-		i++;
+		buf[len++] = digits[n % base];
+		n /= base;
 	}
-}
-
-void	ft_putnbr(int n, int *count)
-{
-	long	num;
-
-	num = n;
-	if (num < 0)
+	i = len;
+	while (i > 0)
 	{
-		ft_putchar('-', count);
-		num = -num;
+		i--;
+		if (write_all(&buf[i], 1) < 0)
+			return (-1);
 	}
-	if (num >= 10)
-		ft_putnbr(num / 10, count);
-	ft_putchar((num % 10) + '0', count);
+	return (len);
 }
 
-void	ft_puthex(unsigned int n, int *count)
+static int print_int(int n)
 {
-	char	*hex_digits;
+	unsigned long	u;
+	int				prefix;
+	int				digits;
 
-	hex_digits = "0123456789abcdef";
-	if (n >= 16)
-		ft_puthex(n / 16, count);
-	ft_putchar(hex_digits[n % 16], count);
-}
-
-void	handle_format(char specifier, va_list ap, int *count)
-{
-	if (specifier == 'c')
-		ft_putchar((char)va_arg(ap, int), count);
-	else if (specifier == 's')
-		ft_putstr(va_arg(ap, char *), count);
-	else if (specifier == 'd')
-		ft_putnbr(va_arg(ap, int), count);
-	else if (specifier == 'x')
-		ft_puthex(va_arg(ap, unsigned int), count);
-	else if (specifier == '%')
-		ft_putchar('%', count);
+	prefix = 0;
+	if (n < 0)
+	{
+		if (write_all("-", 1) < 0)
+			return (-1);
+		prefix = 1;
+		u = (unsigned long)(-(long)n);
+	}
 	else
+		u = (unsigned long)n;
+	digits = printf_unsigned(u, "0123456789", 10u);
+	if (digits < 0)
+		return (-1);
+	return (prefix + digits);
+}
+
+static int print_conversion(char spec, va_list ap)
+{
+	unsigned char 	c;
+
+	if (spec == 'c')
 	{
-		ft_putchar('%', count);
-		ft_putchar(specifier, count);
+		c = (unsigned char)va_arg(ap, int);
+		return (write_all((const char *)&c, 1));
 	}
+	if (spec == 's')
+		return (print_str(va_arg(ap, const char *)));
+	if (spec == 'd')
+		return (print_int(va_arg(ap, int)));
+	if (spec == 'x')
+		return (printf_unsigned(
+			(unsigned long)va_arg(ap, unsigned int),
+			"0123456789abcdef",
+			16u
+		));
+	if (spec == '%')
+		return (write_all("%", 1));
+	if (write_all("%", 1) < 0 || write_all(&spec, 1) < 0)
+		return (-1);
+	return (2);
 }
 
 int	mini_printf(const char *format, ...)
 {
-	va_list	ap;
-	int		i;
-	int		count;
+	va_list ap;
+	size_t i;
+	int	count;
+	int added;
 
 	if (!format)
-		return (0);
+		return (-1);
+	va_start(ap, format);
 	i = 0;
 	count = 0;
-	va_start(ap, format);
-	while (format[i] != '\0')
+	while (format[i])
 	{
-		if (format[i] == '%' && format[i + 1] != '\0')
+		if (format[i] == '%' && format[i + 1])
 		{
-			handle_format(format[i + 1], ap, &count);
+			added = print_conversion(format[i + 1], ap);
 			i += 2;
 		}
 		else
 		{
-			ft_putchar(format[i], &count);
+			added = write_all(&format[i], 1);
 			i++;
 		}
+		if (added < 0)
+		{
+			va_end(ap);
+			return (-1);
+		}
+		count += added;
 	}
 	va_end(ap);
 	return (count);

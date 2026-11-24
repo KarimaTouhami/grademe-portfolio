@@ -1,20 +1,13 @@
 #include <unistd.h>
 
-int	ft_puts(const char *s)
+int	gm_puts(const char *s)
 {
-	int	i;
-
-	if (!s)
-		return (-1);
-	i = 0;
-	while (s[i] != '\0')
-		i++;
-	if (i > 0)
+	int	i = 0;
+	while (s[i])
 	{
-		if (write(1, s, i) == -1)
-			return (-1);
+		write (1, &s[i], 1);
+		i++;
 	}
-	if (write(1, "\n", 1) == -1)
-		return (-1);
+	write(1, "\n", 1);
 	return (0);
 }
