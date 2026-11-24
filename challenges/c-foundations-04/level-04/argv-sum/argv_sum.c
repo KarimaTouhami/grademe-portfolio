@@ -1,63 +1,71 @@
 #include <unistd.h>
 
-void	ft_putchar(char c)
+static long	parse_long(const char *s)
 {
-	write(1, &c, 1);
-}
-
-void	ft_putnbr(int nb)
-{
-	long	n;
-
-	n = nb;
-	if (n < 0)
-	{
-		ft_putchar('-');
-		n = -n;
-	}
-	if (n > 9)
-		ft_putnbr(n / 10);
-	ft_putchar((n % 10) + '0');
-}
-
-int	ft_atoi(const char *str)
-{
-	int	i;
-	int	sign;
-	int	result;
+	int		i;
+	long	sign;
+	long	val;
 
 	i = 0;
 	sign = 1;
-	result = 0;
-	while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
+	val = 0;
+	while (s[i] == ' ' || (s[i] >= '\t' && s[i] <= '\r'))
 		i++;
-	if (str[i] == '-' || str[i] == '+')
+	if (s[i] == '-' || s[i] == '+')
 	{
-		if (str[i] == '-')
+		if (s[i] == '-')
 			sign = -1;
 		i++;
 	}
-	while (str[i] >= '0' && str[i] <= '9')
+	while (s[i] >= '0' && s[i] <= '9')
 	{
-		result = result * 10 + (str[i] - '0');
+		val = val * 10 + (s[i] - '0');
 		i++;
 	}
-	return (result * sign);
+	return (val * sign);
 }
 
-int	main(int ac, char **av)
+static void	put_long(long n)
 {
-	int	i;
-	int	sum;
+	unsigned long	u;
+	char			buf[32];
+	int				i;
 
-	sum = 0;
-	i = 1;
-	while (i < ac)
+	if (n < 0)
 	{
-		sum += ft_atoi(av[i]);
+		write(1, "-", 1);
+		u = (unsigned long)(-(n + 1)) + 1;
+	}
+	else
+		u = (unsigned long)n;
+	i = 0;
+	if (u == 0)
+		buf[i++] = '0';
+	while (u > 0)
+	{
+		buf[i++] = (char)('0' + (u % 10));
+		u /= 10;
+	}
+	while (i > 0)
+	{
+		i--;
+		write(1, &buf[i], 1);
+	}
+}
+
+int	main(int argc, char **argv)
+{
+	int		i;
+	long	sum;
+
+	i = 1;
+	sum = 0;
+	while (i < argc)
+	{
+		sum += parse_long(argv[i]);
 		i++;
 	}
-	ft_putnbr(sum);
-	ft_putchar('\n');
+	put_long(sum);
+	write(1, "\n", 1);
 	return (0);
 }

@@ -1,12 +1,12 @@
-unsigned int	ft_gcd(unsigned int a, unsigned int b)
+static unsigned int	gcd_u(unsigned int a, unsigned int b)
 {
-	unsigned int	temp;
+	unsigned int	rem;
 
 	while (b != 0)
 	{
-		temp = b;
-		b = a % b;
-		a = temp;
+		rem = a % b;
+		a = b;
+		b = rem;
 	}
 	return (a);
 }
@@ -15,5 +15,5 @@ unsigned int	lcm(unsigned int a, unsigned int b)
 {
 	if (a == 0 || b == 0)
 		return (0);
-	return ((a / ft_gcd(a, b)) * b);
+	return ((a / gcd_u(a, b)) * b);
 }
